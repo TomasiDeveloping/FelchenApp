@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>
+        Fang Details
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Fang-Details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card>
+    <div class="container">
+      <div class="title">Fangdatum</div>
+      <div class="item">{{fang.FangDatum | date: 'dd.MM.y HH:mm'}}</div>
+      <div class="title">Nymphenname</div>
+      <div class="item">{{fang.NymphenName}}</div>
+      <div class="title">Nymphenfarbe</div>
+      <div class="item">{{fang.NymphenFarbe}}</div>
+      <div class="title">Hackengrösse</div>
+      <div class="item">{{fang.Hackengroesse}}</div>
+      <div class="title">Köpfchen</div>
+      <div class="item">{{fang.Koepfchen}}</div>
+      <div class="title">Gewässer</div>
+      <div class="item">{{fang.GewaesserName}}</div>
+      <div class="title">Tiefe des Standorts</div>
+      <div class="item">{{fang.TiefeStandort}} Meter</div>
+      <div class="title">Tiefe des Fischfangs</div>
+      <div class="item">{{fang.TiefeFischFang}} Meter</div>
+      <div class="title">Wassertemperatur</div>
+      <div class="item">{{fang.WasserTemperatur}} &#8451;</div>
+      <div class="title">Wetter</div>
+      <div class="item">{{fang.Wetter}}</div>
+      <div class="title">Lufttemperatur</div>
+      <div class="item">{{fang.LuftTemperatur}} &#8451;</div>
+      <div class="title">Luftdruck</div>
+      <div class="item">{{fang.Luftdruck}} hPa</div>
+      <div class="title">Windgeschwindigkeit</div>
+      <div class="item">{{fang.Windgeschwindigkeit}} m/sec</div>
+      <ion-button fill="outline" size="small" color="danger" (click)="deleteCatch(fang)">Fang löschen</ion-button>
+    </div>
+  </ion-card>
+</ion-content>

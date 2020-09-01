@@ -1,0 +1,43 @@
+ion-title{
+  text-align: center;
+  color: darkorange;
+}
+#addButton {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3%;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.item{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+#detail{
+  width: 50%;
+  align-self: flex-end;
+  margin-right: 20px;
+}
+.card{
+  background-color: dimgray;
+  color: white;
+}
+ion-spinner{
+  color: darkorange;
+}
+.spinner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}

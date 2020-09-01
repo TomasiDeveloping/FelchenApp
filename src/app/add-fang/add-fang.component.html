@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Fang hinzufügen
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Fang hinzufügen</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="container">
+  <ion-item>
+    <ion-label position="floating">Name der Nymphe:</ion-label>
+    <ion-input placeholder="Name der Nymphe" type="text"></ion-input>
+  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nymphenfarbe:</ion-label>
+      <ion-input placeholder="Nymphenfarbe" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Hackengrösse:</ion-label>
+      <ion-input placeholder="Hackengrösse" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Köpfchen der Nymphe:</ion-label>
+      <ion-input placeholder="Köpfchen der Nymphe" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Gewässername:</ion-label>
+      <ion-input placeholder="Gewässername" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Tiefe des Standorts in Meter:</ion-label>
+      <ion-input placeholder="Tiefe des Standorts" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Tiefe des Fischfangs in Meter:</ion-label>
+      <ion-input placeholder="Tiefe des Fischfangs" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Wassertemperatur in &#8451;:</ion-label>
+      <ion-input placeholder="Wassertemperatur" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Wetter beim Fischfang</ion-label>
+      <ion-input placeholder="Wetter" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Lufttemperatur in &#8451;:</ion-label>
+      <ion-input placeholder="Lufttemperatur" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Luftdruck in hPa:</ion-label>
+      <ion-input placeholder="Luftdruck" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Windgeschwindigkeit in m/sec:</ion-label>
+      <ion-input placeholder="Windgeschwindigkeit" type="number"></ion-input>
+    </ion-item>
+  </div>
+  <ion-button fill="outline">Speichern</ion-button>
+  <ion-button color="danger" fill="outline" (click)="cancel()">Abbrechen</ion-button>
+</ion-content>

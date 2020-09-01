@@ -1,0 +1,8 @@
+{
+  "name": "FelchenApp",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

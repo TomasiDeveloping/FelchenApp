@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Übersicht
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Statistik</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-button expand="block" fill="outline" id="addButton" (click)="addCatch()">Fang hinzufügen</ion-button>
+
+  <div *ngIf="fangs; else spinner">
+  <ion-card class="card" *ngFor="let fang of fangs">
+    <div class="container">
+      <div class="row">
+        <div class="item">Fangdatum</div>
+        <div class="item">{{fang.FangDatum | date: 'dd.MM.y'}}</div>
+      </div>
+      <div class="row">
+        <div class="item">Gewässer</div>
+        <div class="item">{{fang.GewaesserName}}</div>
+      </div>
+      <div class="row">
+        <div class="item">Nymphenname</div>
+        <div class="item">{{fang.NymphenName}}</div>
+      </div>
+      <div class="row">
+        <div class="item">Wetter</div>
+        <div class="item">{{fang.Wetter}}</div>
+      </div>
+    <ion-button fill="outline" size="small" id="detail" (click)="openDetails(fang)">Details zum Fang</ion-button>
+    </div>
+  </ion-card>
+  </div>
+  <ng-template #spinner>
+    <div class="spinner">
+    <ion-spinner name="crescent"></ion-spinner>
+      <div>Lade Daten....</div>
+    </div>
+  </ng-template>
+</ion-content>
