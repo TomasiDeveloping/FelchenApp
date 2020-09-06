@@ -2,81 +2,83 @@ import {Component, OnInit} from '@angular/core';
 import {Fang} from '../models';
 import {Router} from '@angular/router';
 import {CatchService} from '../service/catch.service';
+import {ModalController, ViewWillEnter} from '@ionic/angular';
+import {FangDetailsComponent} from '../fang-details/fang-details.component';
+import {AddFangComponent} from '../add-fang/add-fang.component';
+import {HttpErrorResponse} from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-tab1',
     templateUrl: 'tab1.page.html',
     styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit{
-    // fangs: Fang[] = [
-    //     {
-    //         FangID:  1,
-    //         FangDatum: new Date('2015-03-25'),
-    //         NymphenName: 'Red Devil',
-    //         NymphenFarbe: 'Rot',
-    //         Hackengroesse: 12,
-    //         Koepfchen: 'Rund',
-    //         GewaesserName: 'Zürichsee',
-    //         TiefeStandort: 23,
-    //         TiefeFischFang: 20,
-    //         WasserTemperatur: 23,
-    //         Wetter: 'Regen',
-    //         Luftdruck: 1000,
-    //         Windgeschwindigkeit: 5,
-    //         LuftTemperatur: 35,
-    //     },
-    //     {
-    //         FangID:  2,
-    //         FangDatum: new Date('2016-05-20'),
-    //         NymphenName: 'Silver',
-    //         NymphenFarbe: 'Blau- Rot',
-    //         Hackengroesse: 18,
-    //         Koepfchen: 'Gold',
-    //         GewaesserName: 'Hallwilersee',
-    //         TiefeStandort: 18,
-    //         TiefeFischFang: 18,
-    //         WasserTemperatur: 20,
-    //         Wetter: 'Schön',
-    //         Luftdruck: 800,
-    //         Windgeschwindigkeit: 10,
-    //         LuftTemperatur: 28,
-    //     },
-    //     {
-    //         FangID:  3,
-    //         FangDatum: new Date('2020-08-30'),
-    //         NymphenName: 'Sunrise',
-    //         NymphenFarbe: 'Dunkel mit Blau',
-    //         Hackengroesse: 16,
-    //         Koepfchen: 'Gebunden',
-    //         GewaesserName: 'Zürichsee',
-    //         TiefeStandort: 28,
-    //         TiefeFischFang: 25,
-    //         WasserTemperatur: 18,
-    //         Wetter: 'Bewölkt',
-    //         Luftdruck: 870,
-    //         Windgeschwindigkeit: 12,
-    //         LuftTemperatur: 17.8,
-    //     },
-    // ];
+export class Tab1Page implements OnInit {
 
     fangs: Fang[];
-    constructor(private router: Router, private catchService: CatchService) {
-    }
+    isLoading = false;
+    currentUserId: number;
+    connectionError = false;
 
-    openDetails(fang: Fang) {
-        this.router.navigate(['tabs/tab1/details/', {fang: JSON.stringify(fang)}]).then();
-    }
-
-    addCatch() {
-        this.router.navigate(['tabs/tab1/newCatch']).then();
+    constructor(private router: Router,
+                private modalController: ModalController,
+                private catchService: CatchService) {
     }
 
     ngOnInit(): void {
-        this.catchService.getCatches().subscribe(
+        this.currentUserId = Number(localStorage.getItem('id'));
+        this.getData();
+    }
+
+    getData() {
+        this.isLoading = true;
+        this.connectionError = false;
+        this.catchService.getCatchesByUserId(this.currentUserId).subscribe(
             (data) => {
                 this.fangs = data;
+                this.isLoading = false;
+            }, (error: HttpErrorResponse) => {
+                Swal.fire('Daten laden', 'Daten konnten nicht geladen werden', 'error').then();
+                this.isLoading = false;
+                this.connectionError = true;
             }
         );
+    }
+
+    async openDetails(fang: Fang) {
+        const modal = await this.modalController.create({
+            component: FangDetailsComponent,
+            cssClass: 'my-custom-class',
+            componentProps: {fang}
+        });
+
+        modal.onDidDismiss()
+            .then((data) => {
+                if (data.data) {
+                    this.getData();
+                }
+            });
+
+        return await modal.present();
+
+    }
+
+    async addCatch() {
+        const modal = await this.modalController.create({
+            component: AddFangComponent
+        });
+
+        modal.onDidDismiss()
+            .then((data) => {
+                if (data.data) {
+                    this.getData();
+                }
+            });
+
+        return await modal.present();
+    }
+
+    refresh() {
+        this.getData();
     }
 }

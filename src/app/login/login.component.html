@@ -1,0 +1,17 @@
+<h1>Login Felchen App</h1>
+<div id="loginContainer">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+  <ion-item>
+    <ion-label position="floating">Email:</ion-label>
+    <ion-input type="text" formControlName="email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Passwort:</ion-label>
+    <ion-input type="password" formControlName="password"></ion-input>
+  </ion-item>
+  <ion-button fill="outline" type="submit" [disabled]="loginForm.invalid">Login</ion-button>
+  </form>
+  <p (click)="register()">Jetzt Registrieren</p>
+  <p (click)="forgotPassword()">Passwort vergessen ?</p>
+</div>
+

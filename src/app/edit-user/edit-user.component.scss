@@ -1,0 +1,27 @@
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+ion-button{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.editContainer{
+  margin-top: 10px;
+  padding: 5px;
+}
+.editContainer span{
+  color: #3a7be0;
+}
+#passwordButton {
+  width: 90%;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#passwordButton ion-button {
+  width: 100%;
+}

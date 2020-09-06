@@ -1,0 +1,48 @@
+<div class="editContainer" *ngIf="user">
+  <div>Daten von: <span>{{user.FirstName}} {{user.LastName}}</span></div>
+  <form [formGroup]="userForm">
+    <ion-item>
+      <ion-label position="floating">Vorname:</ion-label>
+      <ion-input placeholder="Vorname" type="text" formControlName="firstName" [(ngModel)]="user.FirstName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nachname:</ion-label>
+      <ion-input placeholder="Nachname" type="text" formControlName="lastName" [(ngModel)]="user.LastName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email:</ion-label>
+      <ion-input placeholder="Email" type="text" formControlName="email" [(ngModel)]="user.Email"></ion-input>
+    </ion-item>
+    <div class="buttonContainer">
+      <ion-button size="small" color="primary" fill="outline" (click)="save()" [disabled]="userForm.invalid" *ngIf="!editPassword">Speichern</ion-button>
+      <ion-button size="small" color="danger" fill="outline" (click)="cancel()">Abbrechen</ion-button>
+    </div>
+  </form>
+
+  <div id="passwordButton">
+    <ion-button size="small" color="primary" fill="outline" (click)="showEditPassword()">Passwort ändrn</ion-button>
+  </div>
+  <div class="changePassword" *ngIf="editPassword">
+    <form [formGroup]="changePasswordForm">
+      <ion-item>
+        <ion-label position="floating">Altes Passwort:</ion-label>
+        <ion-input placeholder="altes Passwort" type="password" formControlName="oldPassword" [(ngModel)]="oldPassword"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Neues Passwort:</ion-label>
+        <ion-input placeholder="neues Passwort" type="password" formControlName="newPassword" [(ngModel)]="newPassword"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Passwort wiederholen:</ion-label>
+        <ion-input placeholder="Passwort wiederholen" type="password" formControlName="repeatPassword" [(ngModel)]="repeatPassword"></ion-input>
+      </ion-item>
+      <div class="buttonContainer">
+        <ion-button size="small" color="primary" fill="outline" (click)="changePassword()"
+        [disabled]="(oldPassword !== user.Password) || (newPassword !== repeatPassword) || (changePasswordForm.invalid)">Speichern</ion-button>
+        <ion-button size="small" color="danger" fill="outline" (click)="cancel()">Abbrechen</ion-button>
+      </div>
+    </form>
+  </div>
+
+
+</div>

@@ -1,0 +1,25 @@
+#loginContainer{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: auto;
+  border: 2px solid darkorange;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 7px;
+  padding: 5px;
+}
+h1{
+  text-align: center;
+  color: darkorange;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+ion-button{
+  margin-top: 20px;
+}
+p{
+  text-align: center;
+  color: darkorange;
+  font-size: .8rem;
+}

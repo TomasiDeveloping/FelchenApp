@@ -1,17 +1,56 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            Einstellungen
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Einstellungen</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+    <div id="button">
+        <ion-button size="small" fill="outline" color="danger" (click)="logOut()">Abmelden</ion-button>
+    </div>
+
+    <div id="title">Benutzerdaten:</div>
+    <div class="userContainer">
+        <div class="row">
+            <div>Vorname:</div>
+            <div>{{currentUser?.FirstName}}</div>
+        </div>
+        <div class="row">
+            <div>Nachname:</div>
+            <div>{{currentUser?.LastName}}</div>
+        </div>
+        <div class="row">
+            <div>Email:</div>
+            <div>{{currentUser?.Email}}</div>
+        </div>
+        <div class="buttonContainer">
+            <ion-button size="small" fill="outline" color="secondary" (click)="editUser(currentUser)">Daten bearbeiten</ion-button>
+        </div>
+    </div>
+
+    <div class="balken"></div>
+
+    <div id="developContainer">
+        <div id="developTitle">Developing by</div>
+        <img id="logo" src="../../assets/Tomasi.png" alt="TomasiDeveloping Logo">
+        <div id="version">VERSION: 1.1.2</div>
+        <div id="supportButton">
+            <ion-button size="small" fill="outline">E-Mail an Support</ion-button>
+        </div>
+    </div>
+
+    <div class="balken"></div>
+
+    <div id="deleteUserContainer">
+        <ion-button size="small" color="danger" fill="outline" (click)="deleteUser()">Benutzer löschen</ion-button>
+    </div>
+
 </ion-content>

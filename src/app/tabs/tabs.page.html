@@ -1,4 +1,4 @@
-<ion-tabs>
+<ion-tabs *ngIf="loggedUser; else login">
 
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tab1">
@@ -11,10 +11,14 @@
       <ion-label>Wetter</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3">
+    <ion-tab-button tab="tab3" (change)="getStatus($event)">
       <ion-icon name="settings-sharp"></ion-icon>
       <ion-label>Einstellungen</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 
 </ion-tabs>
+
+<ng-template #login>
+<app-login (status)="getStatus($event)"></app-login>
+</ng-template>

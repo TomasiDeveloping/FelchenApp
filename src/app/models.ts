@@ -1,16 +1,30 @@
 export interface Fang {
     FangID: number;
-    FangDatum: Date;
+    UserID: number;
+    FangDatum?: Date;
     NymphenName: string;
     NymphenFarbe: string;
-    Hackengroesse: number;
+    Hackengroesse?: number;
     Koepfchen: string;
     GewaesserName: string;
-    TiefeStandort: number;
-    TiefeFischFang: number;
-    WasserTemperatur: number;
+    TiefeStandort?: number;
+    TiefeFischFang?: number;
+    WasserTemperatur?: number;
     Wetter: string;
-    Luftdruck: number;
-    Windgeschwindigkeit: number;
-    LuftTemperatur: number;
+    Luftdruck?: number;
+    Windgeschwindigkeit?: number;
+    LuftTemperatur?: number;
+    AllowPublic: boolean;
 }
+export interface LoginUser {
+    id: string;
+    access_token: string;
+}
+export interface User {
+     UserID: number;
+     FirstName: string;
+     LastName: string;
+     Email: string;
+     Password: string;
+     IsActive: boolean;
+ }

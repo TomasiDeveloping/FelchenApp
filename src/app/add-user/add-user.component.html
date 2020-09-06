@@ -1,0 +1,20 @@
+<div class="newUserContainer">
+  <h2>Felchen App</h2>
+  <div id="welcome">Besten Dank für dein Interesse an der Felchen App, nach der Registration kannst Du die App benützen.
+    </div>
+  <div id="dataSchutz">Persönliche Daten werden streng vertraulich behandelt und weder an Dritte verkauft noch weiter gegeben.</div>
+  <form id="userForm" [formGroup]="newUserForm">
+    <ion-label position="floating">Vorname:</ion-label>
+    <ion-input placeholder="Vorname" type="text" formControlName="firstName" [(ngModel)]="newUser.FirstName"></ion-input>
+    <ion-label position="floating">Nachname:</ion-label>
+    <ion-input placeholder="Nachname" type="text" formControlName="lastName" [(ngModel)]="newUser.LastName"></ion-input>
+    <ion-label position="floating">Email:</ion-label>
+    <ion-input placeholder="Email" type="email" formControlName="email" [(ngModel)]="newUser.Email"></ion-input>
+    <ion-label position="floating">Password:</ion-label>
+    <ion-input placeholder="Passwort" type="password" formControlName="password" [(ngModel)]="newUser.Password"></ion-input>
+  </form>
+  <div id="registerButton">
+    <ion-button size="small" fill="outline" color="primary" (click)="register()" [disabled]="newUserForm.invalid">Registrieren</ion-button>
+    <ion-button size="small" fill="outline" color="danger" (click)="cancel()">Abbrechen</ion-button>
+  </div>
+</div>

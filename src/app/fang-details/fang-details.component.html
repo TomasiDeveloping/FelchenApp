@@ -1,11 +1,9 @@
-<ion-header [translucent]="true">
+<ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-      <ion-title>
-        Fang Details
-      </ion-title>
+      <div class="headerContainer">
+        <ion-icon id="arrowIcon" (click)="closeModal()" name="arrow-back-outline"></ion-icon>
+        <div id="headerTitle">Fang Details</div>
+      </div>
     </ion-toolbar>
   </ion-header>
 

@@ -1,0 +1,28 @@
+.newUserContainer {
+  padding: 10px;
+}
+h2 {
+  text-align: center;
+  color: darkorange;
+}
+#welcome {
+  text-align: center;
+  font-size: .9rem;
+}
+#dataSchutz {
+  margin-top: 5px;
+  font-size: .8rem;
+  color: #e04055;
+}
+#userForm {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  border: 2px solid darkorange;
+  border-radius: 10px;
+  padding: 10px;
+}
+#registerButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
