@@ -18,29 +18,29 @@
       <div class="title">Fangdatum</div>
       <div class="item">{{fang.FangDatum | date: 'dd.MM.y HH:mm'}}</div>
       <div class="title">Nymphenname</div>
-      <div class="item">{{fang.NymphenName}}</div>
+      <div class="item">{{fang.NymphenName ? fang.NymphenName : 'Keine Angaben'}}</div>
       <div class="title">Nymphenfarbe</div>
-      <div class="item">{{fang.NymphenFarbe}}</div>
+      <div class="item">{{fang.NymphenFarbe ? fang.NymphenFarbe : 'Keine Angaben'}}</div>
       <div class="title">Hackengrösse</div>
-      <div class="item">{{fang.Hackengroesse}}</div>
+      <div class="item">{{fang.Hackengroesse ? fang.Hackengroesse : 'Keine Angaben'}}</div>
       <div class="title">Köpfchen</div>
-      <div class="item">{{fang.Koepfchen}}</div>
+      <div class="item">{{fang.Koepfchen ? fang.Koepfchen : 'Keine Angaben'}}</div>
       <div class="title">Gewässer</div>
-      <div class="item">{{fang.GewaesserName}}</div>
+      <div class="item">{{fang.GewaesserName ? fang.GewaesserName : 'Keine Angaben'}}</div>
       <div class="title">Tiefe des Standorts</div>
-      <div class="item">{{fang.TiefeStandort}} Meter</div>
+      <div class="item">{{fang.TiefeStandort ? fang.TiefeStandort + ' Meter' : 'Keine Angaben'}}</div>
       <div class="title">Tiefe des Fischfangs</div>
-      <div class="item">{{fang.TiefeFischFang}} Meter</div>
+      <div class="item">{{fang.TiefeFischFang ? fang.TiefeFischFang + ' Meter' : 'Keine Angaben'}}</div>
       <div class="title">Wassertemperatur</div>
-      <div class="item">{{fang.WasserTemperatur}} &#8451;</div>
+      <div class="item">{{fang.WasserTemperatur ? fang.WasserTemperatur + ' &#8451;' : 'Keine Angaben'}}</div>
       <div class="title">Wetter</div>
-      <div class="item">{{fang.Wetter}}</div>
+      <div class="item">{{fang.Wetter ? fang.Wetter : 'Keine Angaben'}}</div>
       <div class="title">Lufttemperatur</div>
-      <div class="item">{{fang.LuftTemperatur}} &#8451;</div>
+      <div class="item">{{fang.LuftTemperatur ? fang.LuftTemperatur +  ' &#8451;' : 'Keine Angaben'}}</div>
       <div class="title">Luftdruck</div>
-      <div class="item">{{fang.Luftdruck}} hPa</div>
+      <div class="item">{{fang.Luftdruck ? fang.Luftdruck + ' hPa' : 'Keine Angaben'}}</div>
       <div class="title">Windgeschwindigkeit</div>
-      <div class="item">{{fang.Windgeschwindigkeit}} m/sec</div>
+      <div class="item">{{fang.Windgeschwindigkeit ? fang.Windgeschwindigkeit + 'm/sec' : 'Keine Angaben'}}</div>
       <ion-button fill="outline" size="small" color="danger" (click)="deleteCatch(fang)">Fang löschen</ion-button>
     </div>
   </ion-card>

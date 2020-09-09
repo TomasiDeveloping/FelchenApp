@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Wetter
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,20 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Wetter</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div class="wetterContainer" *ngIf="wetter">
+    <img src="{{wetter.IconURL}}" alt="wetterIcon">
+    <div id="temperature">{{wetter.Temperature | number: '1.1-1'}} &#8451;</div>
+    <div id="ortsName">{{wetter.OrtsName}}</div>
+    <div>Luftdruck: {{wetter.Luftdruck}} hPa</div>
+    <div>Feuchtigkeit: {{wetter.Feuchtigkeit}}%</div>
+    <div>Windgeschwindigkeit: {{wetter.Windgeschwindigkeit}} m/sec</div>
+    <div>Windrichtung: {{wetter.Windrichtung}}</div>
+    <div id="beschreibung">{{wetter.BeschreibungTitle}}</div>
+    <div>{{wetter.Beschreibung}}</div>
+    <div id="wetterDatum">Wettermessung: {{wetter.WetterDatum | date: 'dd.MM.yyyy HH.mm.ss'}}</div>
+  </div>
 </ion-content>
+

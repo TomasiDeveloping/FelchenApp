@@ -1,0 +1,21 @@
+.wetterContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+}
+#temperature{
+  font-size: 2rem;
+}
+#ortsName {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+#wetterDatum {
+  align-self: center;
+}
+#beschreibung {
+  margin-top: 20px;
+}

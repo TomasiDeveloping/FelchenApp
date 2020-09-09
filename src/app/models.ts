@@ -28,3 +28,16 @@ export interface User {
      Password: string;
      IsActive: boolean;
  }
+export interface Wetter {
+    IconURL: string;
+    wetterId: number;
+    OrtsName: string;
+    Temperature: string;
+    Luftdruck?: number;
+    Feuchtigkeit?: number;
+    Windgeschwindigkeit?: number;
+    Windrichtung: string;
+    Beschreibung: string;
+    BeschreibungTitle: string;
+    WetterDatum?: Date;
+}
