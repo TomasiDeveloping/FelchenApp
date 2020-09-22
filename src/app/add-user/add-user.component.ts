@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../service/user.service';
 import {User} from '../models';
 import {ModalController} from '@ionic/angular';
 import Swal from 'sweetalert2';
 import {HttpErrorResponse} from '@angular/common/http';
+import * as sha256 from 'sha256';
 
 @Component({
   selector: 'app-add-user',
@@ -12,12 +13,13 @@ import {HttpErrorResponse} from '@angular/common/http';
   styleUrls: ['./add-user.component.scss'],
 })
 export class AddUserComponent implements OnInit {
-    newUserForm: FormGroup;
-    newUser: User;
+  newUserForm: FormGroup;
+  newUser: User;
 
   constructor(private formBuilder: FormBuilder,
               private modalCtrl: ModalController,
-              private userService: UserService) { }
+              private userService: UserService) {
+  }
 
   ngOnInit() {
     this.newUserForm = this.formBuilder.group({
@@ -42,6 +44,7 @@ export class AddUserComponent implements OnInit {
   }
 
   register() {
+    this.newUser.Password = sha256(this.newUser.Password);
     this.userService.insertUser(this.newUser).subscribe(
         (user) => {
           Swal.fire(

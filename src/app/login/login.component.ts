@@ -5,6 +5,9 @@ import Swal from 'sweetalert2';
 import {ModalController} from '@ionic/angular';
 import {AddUserComponent} from '../add-user/add-user.component';
 import {NgxSpinnerService} from 'ngx-spinner';
+import * as sha256 from 'sha256';
+import {ForgotPasswordComponent} from '../forgot-password/forgot-password.component';
+
 
 @Component({
     selector: 'app-login',
@@ -30,13 +33,18 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    forgotPassword() {
-        alert('RESET PASSWORT');
+    async forgotPassword() {
+        const modal = await this.modalCtr.create({
+            component: ForgotPasswordComponent,
+            cssClass: 'my-custom-class',
+        });
+        return await modal.present();
     }
 
     login() {
         this.spinnerService.show();
-        this.apiService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(
+        const password = sha256(this.loginForm.value.password);
+        this.apiService.login(this.loginForm.value.email, password).subscribe(
             (data) => {
                 if (data) {
                     this.spinnerService.hide();

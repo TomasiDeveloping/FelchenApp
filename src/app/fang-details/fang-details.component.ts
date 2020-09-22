@@ -13,39 +13,42 @@ import {ModalController} from '@ionic/angular';
 export class FangDetailsComponent implements OnInit {
 
   @Input() fang: Fang;
+
   constructor(private catchService: CatchService,
-              private modalCtr: ModalController) { }
+              private modalCtr: ModalController) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
-    deleteCatch(fang: Fang) {
-      Swal.fire({
-        title: 'Wirklich löschen ?',
-        text: 'Bist Du sicher das Du den Fang löschen möchtest ?',
-        icon: 'warning',
-        showCancelButton: true,
-        cancelButtonText: 'Abbrechen',
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ja bitte löschen'
-      }).then((result) => {
-        if (result.value) {
-          this.catchService.deleteCatchById(fang.FangID).subscribe(
-              (data) => {
-                if (data) {
-                  Swal.fire('Fang löschen', 'Fang wurde gelsöcht', 'success').then( () => {
-                    this.modalCtr.dismiss(true).then();
-                  });
-                } else {
-                  Swal.fire('Fang löschen', 'Fang konnte nicht gelöscht werden', 'error').then();
-                }
-              }, (error: HttpErrorResponse) => {
-                Swal.fire('Fang löschen', error.error, 'error').then();
+  deleteCatch(fang: Fang) {
+    Swal.fire({
+      title: 'Wirklich löschen ?',
+      text: 'Bist Du sicher das Du den Fang löschen möchtest ?',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Abbrechen',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ja bitte löschen'
+    }).then((result) => {
+      if (result.value) {
+        this.catchService.deleteCatchById(fang.FangID).subscribe(
+            (data) => {
+              if (data) {
+                Swal.fire('Fang löschen', 'Fang wurde gelsöcht', 'success').then(() => {
+                  this.modalCtr.dismiss(true).then();
+                });
+              } else {
+                Swal.fire('Fang löschen', 'Fang konnte nicht gelöscht werden', 'error').then();
               }
-          );
-        }
-      });
-    }
+            }, (error: HttpErrorResponse) => {
+              Swal.fire('Fang löschen', error.error, 'error').then();
+            }
+        );
+      }
+    });
+  }
 
   closeModal() {
     this.modalCtr.dismiss(false).then();

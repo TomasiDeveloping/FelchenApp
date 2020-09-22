@@ -14,7 +14,7 @@
     </ion-header>
 
     <div id="button">
-        <ion-button size="small" fill="outline" color="danger" (click)="logOut()">Abmelden</ion-button>
+        <ion-button size="small" fill="solid" color="danger" (click)="logOut()">Abmelden</ion-button>
     </div>
 
     <div id="title">Benutzerdaten:</div>
@@ -32,7 +32,8 @@
             <div>{{currentUser?.Email}}</div>
         </div>
         <div class="buttonContainer">
-            <ion-button size="small" fill="outline" color="secondary" (click)="editUser(currentUser)">Daten bearbeiten</ion-button>
+            <ion-button size="small" fill="solid" color="secondary" (click)="editUser(currentUser)">Daten bearbeiten
+            </ion-button>
         </div>
     </div>
 
@@ -41,16 +42,16 @@
     <div id="developContainer">
         <div id="developTitle">Developing by</div>
         <img id="logo" src="../../assets/Tomasi.png" alt="TomasiDeveloping Logo">
-        <div id="version">VERSION: 1.1.2</div>
+        <div id="version">VERSION: {{version}}</div>
         <div id="supportButton">
-            <ion-button size="small" fill="outline">E-Mail an Support</ion-button>
+            <ion-button size="small" fill="solid" (click)="emailToSupport()">E-Mail an Support</ion-button>
         </div>
     </div>
 
     <div class="balken"></div>
 
     <div id="deleteUserContainer">
-        <ion-button size="small" color="danger" fill="outline" (click)="deleteUser()">Benutzer löschen</ion-button>
+        <ion-button size="small" color="danger" fill="solid" (click)="deleteUser()">Benutzer löschen</ion-button>
     </div>
 
 </ion-content>

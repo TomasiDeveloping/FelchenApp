@@ -6,6 +6,7 @@ import {UserService} from '../service/user.service';
 import Swal from 'sweetalert2';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
+import * as sha256 from 'sha256';
 
 @Component({
   selector: 'app-edit-user',
@@ -15,18 +16,22 @@ import {Router} from '@angular/router';
 export class EditUserComponent implements OnInit {
 
   @Input() user: User;
+  currentUser: User;
   editPassword = false;
   userForm: FormGroup;
   changePasswordForm: FormGroup;
   oldPassword: string;
   newPassword: string;
   repeatPassword: string;
+
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
               private router: Router,
-              private modalCtr: ModalController) { }
+              private modalCtr: ModalController) {
+  }
 
   ngOnInit() {
+    this.currentUser = this.user;
     this.userForm = this.formBuilder.group({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
@@ -40,6 +45,7 @@ export class EditUserComponent implements OnInit {
   }
 
   cancel() {
+    this.user = this.currentUser;
     this.modalCtr.dismiss().then();
   }
 
@@ -55,7 +61,12 @@ export class EditUserComponent implements OnInit {
   }
 
   changePassword() {
-    this.user.Password = this.changePasswordForm.value.newPassword;
+    const checkOldPassword = sha256(this.changePasswordForm.value.oldPassword);
+    if (checkOldPassword !== this.user.Password) {
+      Swal.fire('Altes Passwort', 'Altes Passwort ist nicht korrekt', 'error').then();
+      return;
+    }
+    this.user.Password = sha256(this.changePasswordForm.value.newPassword);
     this.userService.updateUser(this.user.UserID, this.user).subscribe(
         (user) => {
           localStorage.clear();

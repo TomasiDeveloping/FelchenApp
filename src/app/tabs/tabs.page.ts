@@ -1,5 +1,4 @@
-import {AfterViewInit, Component, OnChanges, OnInit} from '@angular/core';
-import {ViewDidEnter, ViewWillEnter} from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-tabs',
@@ -7,17 +6,18 @@ import {ViewDidEnter, ViewWillEnter} from '@ionic/angular';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage implements OnInit {
-    loggedUser = false;
+  loggedUser = false;
 
-  constructor() {}
+  constructor() {
+  }
 
-    ngOnInit(): void {
-      if (localStorage.getItem('id')) {
-          this.loggedUser = true;
-      }
+  ngOnInit(): void {
+    if (localStorage.getItem('id')) {
+      this.loggedUser = true;
     }
+  }
 
-    getStatus($event: any) {
+  getStatus($event: any) {
     this.loggedUser = $event;
   }
 }

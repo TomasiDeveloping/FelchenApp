@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Fang} from '../models';
 import {Router} from '@angular/router';
 import {CatchService} from '../service/catch.service';
-import {ModalController, ViewWillEnter} from '@ionic/angular';
+import {ModalController} from '@ionic/angular';
 import {FangDetailsComponent} from '../fang-details/fang-details.component';
 import {AddFangComponent} from '../add-fang/add-fang.component';
 import {HttpErrorResponse} from '@angular/common/http';

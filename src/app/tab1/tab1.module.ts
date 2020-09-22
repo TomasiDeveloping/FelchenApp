@@ -1,13 +1,14 @@
-import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {IonicModule} from '@ionic/angular';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { Tab1Page } from './tab1.page';
+import {Tab1Page} from './tab1.page';
 import {FangDetailsComponent} from '../fang-details/fang-details.component';
 import {AddFangComponent} from '../add-fang/add-fang.component';
+import {ForgotPasswordComponent} from '../forgot-password/forgot-password.component';
 
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
+import {Tab1PageRoutingModule} from './tab1-routing.module';
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
         ReactiveFormsModule,
 
     ],
-  declarations: [Tab1Page, FangDetailsComponent, AddFangComponent]
+    declarations: [Tab1Page, FangDetailsComponent, AddFangComponent, ForgotPasswordComponent]
 })
-export class Tab1PageModule {}
+export class Tab1PageModule {
+}

@@ -13,7 +13,7 @@
         </ion-toolbar>
     </ion-header>
 
-    <ion-button expand="block" fill="outline" id="addButton" (click)="addCatch()">Fang hinzufügen</ion-button>
+    <ion-button expand="block" fill="solid" id="addButton" (click)="addCatch()">Fang hinzufügen</ion-button>
 
     <div *ngIf="fangs">
         <ion-card class="card" *ngFor="let fang of fangs">
@@ -34,7 +34,7 @@
                     <div class="item">Wetter</div>
                     <div class="item">{{fang.Wetter}}</div>
                 </div>
-                <ion-button fill="outline" size="small" id="detail" (click)="openDetails(fang)">Details zum Fang
+                <ion-button fill="solid" size="small" id="detail" (click)="openDetails(fang)">Details zum Fang
                 </ion-button>
             </div>
         </ion-card>
@@ -55,7 +55,7 @@
     <div *ngIf="connectionError">
         <div class="refresh">
             <h4>Es konnte kein Internetverbindung hergestellt werden</h4>
-            <ion-button fill="outline" id="refresh" (click)="refresh()">Neu laden</ion-button>
+            <ion-button fill="solid" id="refresh" (click)="refresh()">Neu laden</ion-button>
         </div>
     </div>
 

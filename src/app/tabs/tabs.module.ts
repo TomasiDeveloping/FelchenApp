@@ -1,11 +1,11 @@
-import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {IonicModule} from '@ionic/angular';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { TabsPageRoutingModule } from './tabs-routing.module';
+import {TabsPageRoutingModule} from './tabs-routing.module';
 
-import { TabsPage } from './tabs.page';
+import {TabsPage} from './tabs.page';
 import {LoginComponent} from '../login/login.component';
 import {AddUserComponent} from '../add-user/add-user.component';
 
@@ -19,4 +19,5 @@ import {AddUserComponent} from '../add-user/add-user.component';
     ],
     declarations: [TabsPage, LoginComponent, AddUserComponent]
 })
-export class TabsPageModule {}
+export class TabsPageModule {
+}

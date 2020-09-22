@@ -1,74 +1,100 @@
 <ion-header>
-  <ion-toolbar>
-    <div class="headerContainer">
-      <ion-icon id="arrowIcon" (click)="closeModal()" name="arrow-back-outline"></ion-icon>
-      <div id="headerTitle">Fang hinzufügen</div>
-    </div>
-  </ion-toolbar>
+    <ion-toolbar>
+        <div class="headerContainer">
+            <ion-icon id="arrowIcon" (click)="closeModal()" name="arrow-back-outline"></ion-icon>
+            <div id="headerTitle">Fang hinzufügen</div>
+        </div>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Fang hinzufügen</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div class="container">
-    <form [formGroup]="addCatchForm">
-  <ion-item>
-    <ion-label position="floating">Name der Nymphe:</ion-label>
-    <ion-input placeholder="Name der Nymphe" type="text" formControlName="nymphenName" [(ngModel)]="fang.NymphenName"></ion-input>
-  </ion-item>
-    <ion-item>
-      <ion-label position="floating">Nymphenfarbe:</ion-label>
-      <ion-input placeholder="Nymphenfarbe" type="text" formControlName="nymphenFarbe" [(ngModel)]="fang.NymphenFarbe"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Hackengrösse:</ion-label>
-      <ion-input placeholder="Hackengrösse" type="number" formControlName="hackengroesse" [(ngModel)]="fang.Hackengroesse"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Köpfchen der Nymphe:</ion-label>
-      <ion-input placeholder="Köpfchen der Nymphe" type="text" formControlName="koepfchen" [(ngModel)]="fang.Koepfchen"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Gewässername:</ion-label>
-      <ion-input placeholder="Gewässername" type="text" formControlName="gewaesserName" [(ngModel)]="fang.GewaesserName"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Tiefe des Standorts in Meter:</ion-label>
-      <ion-input placeholder="Tiefe des Standorts" type="number" formControlName="tiefeStandort" [(ngModel)]="fang.TiefeStandort"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Tiefe des Fischfangs in Meter:</ion-label>
-      <ion-input placeholder="Tiefe des Fischfangs" type="number" formControlName="tiefeFischFang" [(ngModel)]="fang.TiefeFischFang"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Wassertemperatur in &#8451;:</ion-label>
-      <ion-input placeholder="Wassertemperatur" type="number" formControlName="wasserTemperatur" [(ngModel)]="fang.WasserTemperatur"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Wetter beim Fischfang</ion-label>
-      <ion-input placeholder="Wetter" type="text" formControlName="wetter" [(ngModel)]="fang.Wetter"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Lufttemperatur in &#8451;:</ion-label>
-      <ion-input placeholder="Lufttemperatur" type="number" formControlName="luftTemperatur" [(ngModel)]="fang.LuftTemperatur"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Luftdruck in hPa:</ion-label>
-      <ion-input placeholder="Luftdruck" type="number" formControlName="luftdruck" [(ngModel)]="fang.Luftdruck"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Windgeschwindigkeit in m/sec:</ion-label>
-      <ion-input placeholder="Windgeschwindigkeit" type="number" formControlName="windgeschwindigkeit" [(ngModel)]="fang.Windgeschwindigkeit"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Fang Öffentlich machen</ion-label>
-      <ion-checkbox [(ngModel)]="fang.AllowPublic" formControlName="allowPublic"></ion-checkbox>
-    </ion-item>
-  <ion-button fill="outline" type="submit" (click)="addCatch()">Speichern</ion-button>
-  <ion-button color="danger" fill="outline" (click)="cancel()">Abbrechen</ion-button>
-    </form>
-  </div>
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Fang hinzufügen</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <div class="container" *ngIf="!liveData">
+        <p id="weatherLoadTitle">Live Wetter Daten laden</p>
+        <ion-item>
+            <ion-label position="floating">Ortsname:</ion-label>
+            <ion-input class="label" placeholder="Ortsname" type="text" name="city" [(ngModel)]="city"></ion-input>
+        </ion-item>
+        <ion-button *ngIf="city" color="primary" (click)="getByName()">Wetterdaten per Ortsname laden</ion-button>
+        <ion-item>
+            <ion-label class="label" position="floating">Postleitzahl:</ion-label>
+            <ion-input color="primary" placeholder="PLZ" type="number" name="plz" minlength="4" maxlength="4"
+                       [(ngModel)]="plz"></ion-input>
+        </ion-item>
+        <ion-button *ngIf="plz" color="primary" (click)="getByPlz()">Wetterdaten per PLZ laden</ion-button>
+    </div>
+    <div class="container" *ngIf="liveData">
+        <form [formGroup]="addCatchForm">
+            <ion-item>
+                <ion-label position="floating">Name der Nymphe:</ion-label>
+                <ion-input placeholder="Name der Nymphe" type="text" formControlName="nymphenName"
+                           [(ngModel)]="fang.NymphenName"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Nymphenfarbe:</ion-label>
+                <ion-input placeholder="Nymphenfarbe" type="text" formControlName="nymphenFarbe"
+                           [(ngModel)]="fang.NymphenFarbe"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Hackengrösse:</ion-label>
+                <ion-input placeholder="Hackengrösse" type="number" formControlName="hackengroesse"
+                           [(ngModel)]="fang.Hackengroesse"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Köpfchen der Nymphe:</ion-label>
+                <ion-input placeholder="Köpfchen der Nymphe" type="text" formControlName="koepfchen"
+                           [(ngModel)]="fang.Koepfchen"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Gewässername:</ion-label>
+                <ion-input placeholder="Gewässername" type="text" formControlName="gewaesserName"
+                           [(ngModel)]="fang.GewaesserName"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Tiefe des Standorts in Meter:</ion-label>
+                <ion-input placeholder="Tiefe des Standorts" type="number" formControlName="tiefeStandort"
+                           [(ngModel)]="fang.TiefeStandort"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Tiefe des Fischfangs in Meter:</ion-label>
+                <ion-input placeholder="Tiefe des Fischfangs" type="number" formControlName="tiefeFischFang"
+                           [(ngModel)]="fang.TiefeFischFang"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Wassertemperatur in &#8451;:</ion-label>
+                <ion-input placeholder="Wassertemperatur" type="number" formControlName="wasserTemperatur"
+                           [(ngModel)]="fang.WasserTemperatur"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Wetter beim Fischfang</ion-label>
+                <ion-input placeholder="Wetter" type="text" formControlName="wetter"
+                           [(ngModel)]="fang.Wetter"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Lufttemperatur in &#8451;:</ion-label>
+                <ion-input placeholder="Lufttemperatur" type="number" formControlName="luftTemperatur"
+                           [(ngModel)]="fang.LuftTemperatur"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Luftdruck in hPa:</ion-label>
+                <ion-input placeholder="Luftdruck" type="number" formControlName="luftdruck"
+                           [(ngModel)]="fang.Luftdruck"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Windgeschwindigkeit in m/sec:</ion-label>
+                <ion-input placeholder="Windgeschwindigkeit" type="number" formControlName="windgeschwindigkeit"
+                           [(ngModel)]="fang.Windgeschwindigkeit"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Fang Öffentlich machen</ion-label>
+                <ion-checkbox [(ngModel)]="fang.AllowPublic" formControlName="allowPublic"></ion-checkbox>
+            </ion-item>
+            <ion-button fill="solid" type="submit" (click)="addCatch()">Speichern</ion-button>
+            <ion-button color="danger" fill="solid" (click)="cancel()">Abbrechen</ion-button>
+        </form>
+    </div>
 </ion-content>

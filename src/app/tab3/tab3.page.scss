@@ -43,6 +43,8 @@ ion-title{
 }
 #logo{
   display: block;
+  width: 35%;
+  height: auto;
   margin-right: auto;
   margin-left: auto;
   margin-top: 10px;
@@ -58,14 +60,17 @@ ion-title{
   text-align: center;
   font-size: .9rem;
 }
+#developContainer ion-button {
+  width: 100%;
+  color: darkorange;
+}
 #supportButton {
   width: 80%;
   margin-right: auto;
   margin-left: auto;
 }
-#developContainer ion-button {
-  width: 100%;
-  color: darkorange;
+#supportButton ion-button{
+  color: white;
 }
 #deleteUserContainer {
   width: 100%;

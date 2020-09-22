@@ -1,28 +1,62 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Wetter
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            Wetter
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Wetter</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div class="wetterContainer" *ngIf="wetter">
-    <img src="{{wetter.IconURL}}" alt="wetterIcon">
-    <div id="temperature">{{wetter.Temperature | number: '1.1-1'}} &#8451;</div>
-    <div id="ortsName">{{wetter.OrtsName}}</div>
-    <div>Luftdruck: {{wetter.Luftdruck}} hPa</div>
-    <div>Feuchtigkeit: {{wetter.Feuchtigkeit}}%</div>
-    <div>Windgeschwindigkeit: {{wetter.Windgeschwindigkeit}} m/sec</div>
-    <div>Windrichtung: {{wetter.Windrichtung}}</div>
-    <div id="beschreibung">{{wetter.BeschreibungTitle}}</div>
-    <div>{{wetter.Beschreibung}}</div>
-    <div id="wetterDatum">Wettermessung: {{wetter.WetterDatum | date: 'dd.MM.yyyy HH.mm.ss'}}</div>
-  </div>
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Wetter</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <div *ngIf="noWeather" class="noWeatherContainer">
+        <p>Ort wählen für Wetterdaten</p>
+        <p>Der Ort kann auf drei arten Gewählt werden</p>
+        <ul>
+            <li>Nach Ortsnamen</li>
+            <li>Nach PLZ (nur in der Schweiz möglich)</li>
+            <li>Mit GPS (Aktuell bei den meisten Geräten nicht möglich)</li>
+        </ul>
+        <ion-item>
+            <ion-label position="floating">Ortsname:</ion-label>
+            <ion-input class="label" placeholder="Ortsname" type="text" name="city" [(ngModel)]="city"></ion-input>
+        </ion-item>
+        <ion-button *ngIf="city" color="primary" (click)="getByName()">Wetterdaten per Ortsname laden</ion-button>
+        <ion-item>
+            <ion-label class="label" position="floating">Postleitzahl:</ion-label>
+            <ion-input color="primary" placeholder="PLZ" type="number" name="plz" minlength="4" maxlength="4"
+                       [(ngModel)]="plz"></ion-input>
+        </ion-item>
+        <ion-button *ngIf="plz" color="primary" (click)="getByPlz()">Wetterdaten per PLZ laden</ion-button>
+        <ion-button color="primary" (click)="getData()">Ort mit GPS laden</ion-button>
+    </div>
+    <div class="wetterContainer" *ngIf="wetter && !noWeather" [ngClass]="{
+  'night': isNight,
+  'regen': wetter.BeschreibungTitle === 'Regnerisch' || wetter.BeschreibungTitle === 'Nieselregen',
+  'bewoelkt': wetter.BeschreibungTitle === 'Bewölkt',
+  'klar': wetter.BeschreibungTitle === 'Klar',
+  'snow': wetter.BeschreibungTitle === 'Schnee',
+  'nebel': wetter.BeschreibungTitle === 'Nebel',
+  'gewitter': wetter.BeschreibungTitle === 'Gewitter'
+  }">
+        <img src="{{wetter.IconURL}}" alt="wetterIcon">
+        <div id="temperature">{{wetter.Temperature | number: '1.1-1'}} &#8451;</div>
+        <div id="ortsName">{{wetter.OrtsName}}</div>
+        <div>Luftdruck: {{wetter.Luftdruck}} hPa</div>
+        <div>Feuchtigkeit: {{wetter.Feuchtigkeit}}%</div>
+        <div>Wolkendecke: {{wetter.Bewoelkung}}%</div>
+        <div>Windgeschwindigkeit: {{wetter.Windgeschwindigkeit}} m/s</div>
+        <div>Windrichtung: {{wetter.Windrichtung}}</div>
+        <div>Sonnenaufgang: {{wetter.Sonnenaufgang | date: 'HH:mm'}}</div>
+        <div>Sonnenuntergang: {{wetter.Sonnenuntergang | date: 'HH:mm'}}</div>
+        <div id="beschreibung">{{wetter.BeschreibungTitle}}</div>
+        <div>{{wetter.Beschreibung}}</div>
+        <div id="wetterDatum">Wettermessung: {{wetter.WetterDatum | date: 'dd.MM.yyyy HH:mm:ss'}}</div>
+        <ion-icon id="refreshIcon" name="refresh-outline" (click)="newLoad()"></ion-icon>
+        <div>Wetter neu laden</div>
+    </div>
 </ion-content>
 

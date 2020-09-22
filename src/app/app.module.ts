@@ -10,6 +10,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import {FormBuilder} from '@angular/forms';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 
 @NgModule({
@@ -21,12 +23,14 @@ import {NgxSpinnerModule} from 'ngx-spinner';
         AppRoutingModule,
         HttpClientModule,
         NgxSpinnerModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
     ],
     providers: [
         StatusBar,
         SplashScreen,
         FormBuilder,
+        Geolocation,
+        AppVersion,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

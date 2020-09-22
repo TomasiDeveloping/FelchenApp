@@ -5,6 +5,16 @@
   width: 100%;
   align-items: center;
 }
+.noWeatherContainer{
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+}
+ion-button{
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
 #temperature{
   font-size: 2rem;
 }
@@ -15,7 +25,56 @@
 }
 #wetterDatum {
   align-self: center;
+  font-size: .8rem;
+  margin-top: 20px;
 }
 #beschreibung {
   margin-top: 20px;
+  font-size: 1.4rem;
+}
+#refreshIcon {
+  margin-top: 40px;
+  font-size: 2.5rem;
+  color: darkorange;
+}
+.bewoelkt {
+  background-image: url("../../assets/bewoelkt.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+}
+.gewitter {
+  background-image: url("../../assets/gewitter.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+}
+.nebel {
+  background-image: url("../../assets/nebel.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+}
+.snow {
+  background-image: url("../../assets/snow.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+}
+.regen {
+  background-image: url("../../assets/regen.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+}
+.klar {
+  background-image: url("../../assets/klar.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
+}
+.night {
+  background-image: none;
+  background-color: black;
+  color: white;
 }
