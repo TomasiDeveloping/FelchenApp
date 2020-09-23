@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import * as sha256 from 'sha256';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-edit-user',
@@ -27,6 +28,7 @@ export class EditUserComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
               private router: Router,
+              private spinnerService: NgxSpinnerService,
               private modalCtr: ModalController) {
   }
 
@@ -50,11 +52,14 @@ export class EditUserComponent implements OnInit {
   }
 
   save() {
+    this.spinnerService.show();
     this.userService.updateUser(this.user.UserID, this.user).subscribe(
         (user) => {
+          this.spinnerService.hide();
           this.user = user;
           Swal.fire('Benutzerdaten', 'Daten wurden geändert', 'success').then(() => this.modalCtr.dismiss());
         }, (error: HttpErrorResponse) => {
+          this.spinnerService.hide();
           Swal.fire('Benutzerdaten', error.error, 'error').then();
         }
     );
@@ -66,14 +71,17 @@ export class EditUserComponent implements OnInit {
       Swal.fire('Altes Passwort', 'Altes Passwort ist nicht korrekt', 'error').then();
       return;
     }
+    this.spinnerService.show();
     this.user.Password = sha256(this.changePasswordForm.value.newPassword);
     this.userService.updateUser(this.user.UserID, this.user).subscribe(
         (user) => {
           localStorage.clear();
+          this.spinnerService.hide();
           Swal.fire('Passwort ändern', 'Passwort wurde geändert', 'success').then(
               () => this.router.navigate(['tabs']).then(() => window.location.reload())
           );
         }, (error: HttpErrorResponse) => {
+          this.spinnerService.hide();
           Swal.fire('Passwort ändrn', error.error, 'error').then();
         }
     );

@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import {CatchService} from '../service/catch.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ModalController} from '@ionic/angular';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-fang-details',
@@ -15,6 +16,7 @@ export class FangDetailsComponent implements OnInit {
   @Input() fang: Fang;
 
   constructor(private catchService: CatchService,
+              private spinnerService: NgxSpinnerService,
               private modalCtr: ModalController) {
   }
 
@@ -33,16 +35,20 @@ export class FangDetailsComponent implements OnInit {
       confirmButtonText: 'Ja bitte löschen'
     }).then((result) => {
       if (result.value) {
+        this.spinnerService.show();
         this.catchService.deleteCatchById(fang.FangID).subscribe(
             (data) => {
               if (data) {
+                this.spinnerService.hide();
                 Swal.fire('Fang löschen', 'Fang wurde gelsöcht', 'success').then(() => {
                   this.modalCtr.dismiss(true).then();
                 });
               } else {
+                this.spinnerService.hide();
                 Swal.fire('Fang löschen', 'Fang konnte nicht gelöscht werden', 'error').then();
               }
             }, (error: HttpErrorResponse) => {
+              this.spinnerService.hide();
               Swal.fire('Fang löschen', error.error, 'error').then();
             }
         );

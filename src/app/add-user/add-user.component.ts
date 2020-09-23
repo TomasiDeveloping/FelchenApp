@@ -6,6 +6,7 @@ import {ModalController} from '@ionic/angular';
 import Swal from 'sweetalert2';
 import {HttpErrorResponse} from '@angular/common/http';
 import * as sha256 from 'sha256';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-add-user',
@@ -18,6 +19,7 @@ export class AddUserComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private modalCtrl: ModalController,
+              private spinnerService: NgxSpinnerService,
               private userService: UserService) {
   }
 
@@ -44,15 +46,18 @@ export class AddUserComponent implements OnInit {
   }
 
   register() {
+    this.spinnerService.show();
     this.newUser.Password = sha256(this.newUser.Password);
     this.userService.insertUser(this.newUser).subscribe(
         (user) => {
+          this.spinnerService.hide();
           Swal.fire(
               'Neuer Account',
               'Hallo ' + user.FirstName + ' dein Account wurde erstellt.',
               'success'
           ).then(() => this.cancel());
         }, (error: HttpErrorResponse) => {
+          this.spinnerService.hide();
           Swal.fire('Neuer Account', error.error, 'error').then();
         }
     );

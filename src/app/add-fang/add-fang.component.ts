@@ -89,14 +89,17 @@ export class AddFangComponent implements OnInit {
   }
 
   addCatch() {
+    this.spinnerService.show();
     this.catchService.insertCatch(this.fang).subscribe(
         (fang) => {
+          this.spinnerService.hide();
           Swal.fire({
             title: 'Fang hinzufügen',
             text: 'Fang wurde hinzugefügt',
             icon: 'success'
           }).then(() => this.modalCtr.dismiss(true).then());
         }, (error: HttpErrorResponse) => {
+          this.spinnerService.hide();
           Swal.fire('Fang hinzufügen', error.error, 'error').then();
         }
     );
