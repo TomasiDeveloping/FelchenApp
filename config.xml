@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="ch.tomasi.felche" version="2.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="ch.tomasi.felche" version="2.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Felchen App</name>
     <description>Eine App um Statistik zu führen</description>
     <author email="info@tomasi-developing.ch" href="https://www.tomasi-developing.ch">Tomasi Developing</author>
